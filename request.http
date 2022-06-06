@@ -1,0 +1,15 @@
+
+GET http://localhost:8000/products
+
+###create a new product
+POST http://localhost:8000/products
+content-type: application/json
+{
+    "name": "Product 1",
+    "category": "Product 1",
+    "price": "100.00",
+    "imageUrl":"đuawad",
+    "description": "This is a product",
+    "countInStock" : 10
+}
+
