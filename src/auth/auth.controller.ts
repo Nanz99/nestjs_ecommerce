@@ -12,9 +12,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiBody({ type: LoginDto })
   @Post('/login')
-  async login(@Body() input: LoginDto): Promise<any> {
+  async login(@Body() input: LoginDto): Promise<{ token: string }> {
     console.log(input);
-    return this.authService.login();
+    return this.authService.login(input);
   }
   @ApiOperation({ summary: 'Register user' })
   @ApiBody({ type: CreateUserDto })

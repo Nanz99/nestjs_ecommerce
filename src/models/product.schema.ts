@@ -8,8 +8,14 @@ export const ProductSchema = new mongoose.Schema(
     price: { type: Number, default: 0, required: true },
     countInStock: { type: Number },
     description: { type: String },
-    colors: { type: mongoose.Schema.Types.ObjectId, ref: 'Color' },
-    sizes: { type: mongoose.Schema.Types.ObjectId, ref: 'Size' },
+    information: {
+      type: Array,
+      colorId: { type: String },
+      sizeId: { type: String },
+      salePrice: { type: Number },
+      purchasePrice: { type: Number },
+      retailPrice: { type: Number },
+    },
   },
   {
     timestamps: true,

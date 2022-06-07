@@ -33,4 +33,7 @@ export class ProductDto extends mongoose.Document {
 
   @ApiProperty({ type: String })
   description: String;
+
+  @ApiProperty({ type: Array })
+  information: any;
 }

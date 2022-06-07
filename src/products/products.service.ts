@@ -10,7 +10,9 @@ export class ProductsService {
   ) {}
 
   async getAllProducts(): Promise<ProductDto[]> {
-    const products = await this.productModel.find({}).populate({ path: 'categoryId' });
+    const products = await this.productModel
+      .find({})
+      .populate({ path: 'categoryId' });
     return products;
   }
 
@@ -30,13 +32,11 @@ export class ProductsService {
   }
 
   async update(id, product): Promise<any> {
-    const updateProduct = await this.productModel.findByIdAndUpdate(
-      id,
-      product,
-      {
+    const updateProduct = await this.productModel
+      .findByIdAndUpdate(id, product, {
         new: true,
-      },
-    );
+      })
+      .populate({ path: 'categoryId' });
     return {
       message: 'Product has been updated',
       updateProduct,
@@ -44,10 +44,20 @@ export class ProductsService {
   }
 
   async delete(id): Promise<any> {
-    const product = await this.productModel.findByIdAndRemove(id);
+    const product = await this.productModel
+      .findByIdAndRemove(id)
+      .populate({ path: 'categoryId' });
     return {
       message: 'Product has been deleted',
       product,
     };
+  }
+
+  async uploadImage(id, file) {
+    return await this.productModel.findByIdAndUpdate(
+      id,
+      { imageUrl: file },
+      { new: true },
+    );
   }
 }

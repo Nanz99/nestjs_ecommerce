@@ -8,6 +8,6 @@ export class UserDto {
    email: string;
    @ApiProperty({ type: String, description: 'password' })
    password: string;
-   @ApiProperty({ enum: ['customer', 'admin'], description: 'role' })
-   role: string;
+   @ApiProperty({ type: String, description: 'roleId' })
+   roleId: string;
 }

@@ -10,13 +10,15 @@ export class UsersService {
   ) {}
   async create(user: UserDto) {
     const createdUser = new this.userModel(user);
+    await createdUser.populate({ path: 'roleId' });
     return {
       message: 'User has been created',
       product: await createdUser.save(),
     };
   }
   async getAll() {
-    return await this.userModel.find({});
+    const user = await this.userModel.find({}).populate({ path: 'roleId' });
+    return user;
   }
   async getById(id) {
     const user = await this.userModel.findById(id);
