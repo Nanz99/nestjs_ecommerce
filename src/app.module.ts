@@ -6,17 +6,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
-import { SizesService } from './sizes/sizes.service';
 import { SizesModule } from './sizes/sizes.module';
-import { ColorsController } from './colors/colors.controller';
 import { ColorsModule } from './colors/colors.module';
-import { RolesController } from './roles/roles.controller';
 import { RolesModule } from './roles/roles.module';
 import { MulterModule } from '@nestjs/platform-express';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [

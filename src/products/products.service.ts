@@ -37,20 +37,26 @@ export class ProductsService {
         new: true,
       })
       .populate({ path: 'categoryId' });
-    return {
-      message: 'Product has been updated',
-      updateProduct,
-    };
+    return updateProduct
+      ? {
+          message: 'Product has been updated',
+          updateProduct,
+        }
+      : {
+          message: 'Product update failed',
+        };
   }
 
   async delete(id): Promise<any> {
     const product = await this.productModel
       .findByIdAndRemove(id)
       .populate({ path: 'categoryId' });
-    return {
-      message: 'Product has been deleted',
-      product,
-    };
+    return product
+      ? {
+          message: 'Product has been deleted',
+          product,
+        }
+      : { message: 'Product delete failed' };
   }
 
   async uploadImage(id, file) {
@@ -59,5 +65,18 @@ export class ProductsService {
       { imageUrl: file },
       { new: true },
     );
+  }
+
+  async updateStatusSale(id): Promise<{ message: string }> {
+    const updateStatusSale = await this.productModel.findByIdAndUpdate(
+      id,
+      { isSale: true },
+      { new: true },
+    );
+    return updateStatusSale
+      ? {
+          message: 'Update status sale success',
+        }
+      : { message: 'Update status sale failed' };
   }
 }

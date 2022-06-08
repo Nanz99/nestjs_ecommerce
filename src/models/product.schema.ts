@@ -8,6 +8,7 @@ export const ProductSchema = new mongoose.Schema(
     price: { type: Number, default: 0, required: true },
     countInStock: { type: Number },
     description: { type: String },
+    isSale: { type: Boolean , default: false},
     information: {
       type: Array,
       colorId: { type: String },

@@ -11,7 +11,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('', app, document);
-  
+  // await app.useGlobalGuards(new RolesGuard());
   await app.listen(process.env.PORT || 3000, () =>
     console.log(`http://localhost:${process.env.PORT}`),
   );

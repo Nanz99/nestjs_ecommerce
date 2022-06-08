@@ -12,7 +12,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
 import { FormDataRequest } from 'nestjs-form-data';
 import { ProductDto } from './dto/product.dto';
@@ -26,16 +26,14 @@ import { UserDto } from 'src/users/users.dto';
 @ApiTags('Product')
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) {}
 
   @Get('/')
   // @UseGuards(AuthGuard())
-  getAllProducts(
-    // @CurrentUser() user: UserDto
-  ): Promise<ProductDto[]> {
+  getAllProducts(): // @CurrentUser() user: UserDto
+  Promise<ProductDto[]> {
     return this.productsService.getAllProducts();
   }
-
 
   @Get('/:id')
   public getProductById(@Param('id') id: String): Promise<ProductDto> {
@@ -101,7 +99,6 @@ export class ProductsController {
       information: JSON.parse(product.information.replaceAll(`'`, `"`)),
       imageUrl: file?.path || '',
     });
-   
   }
 
   //! update product
@@ -183,6 +180,13 @@ export class ProductsController {
   // ): any {
   //   console.log(files);
   //   // return this.productsService.uploadImage(id, file.path);
-  //   // return of({imagePath: files.path})
+  //   return of({imagePath: files.path})
   // }
+
+  //! Sale
+  @Put('/:id/sale')
+  @ApiOperation({ summary: 'Update status sale' })
+  updateStatusSale(@Param('id') id: String): any {
+    return this.productsService.updateStatusSale(id);
+  }
 }
